@@ -8,17 +8,17 @@ from time import sleep
 from daemonize import daemonize
 from time import gmtime, strftime
 
-#cria um navegador, um browser de codigo
+#creates a browser
 br = mechanize.Browser()
 url = 'http://www.gokano.com'
-email = 'xxx@email.com' 
-password = 'xxx'   
+email = 'lopesronanufsj@gmail.com' 
+password = 'NintendO93!'   
 
-# Prepara para tratar cookies
+# preparing cookies
 cj = cookielib.LWPCookieJar()
 br.set_cookiejar(cj)
 
-# Ajusta algumas opções do navegador
+# browser options
 br.set_handle_equiv(True)
 br.set_handle_gzip(False)
 br.set_handle_redirect(True)
@@ -26,16 +26,18 @@ br.set_handle_referer(True)
 br.set_handle_robots(False)
 br.set_handle_refresh(mechanize._http.HTTPRefreshProcessor(), max_time=1)
 
-# Configura o user-agent.
+# config the user-agent.
 br.addheaders = [('User-agent', 'Mozilla/5.0 (X11;\
  U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615\
 Fedora/3.0.1-1.fc9 Firefox/3.0.1')]
 
-#tempo de atraso em minutos entre cada requisição
-tempo_atraso = 60
+#delay time between requests
+delay_time = 60
 
-@daemonize(stdout='log.txt', stderr='gokano_bot_log.txt')
+@daemonize(stdout='gokano_bot_log.txt', stderr='gokano_bot_log.txt')
 def gokano_bot():
+  
+  print "\n\n\nCollecting for "+email+" user:\n"
   while True:
 
     print "Trying to collect at ", strftime("%Y-%m-%d %H:%M:%S", gmtime())
@@ -60,8 +62,8 @@ def gokano_bot():
   
     except:
 
-      print "Couldn't collect. Trying again in ", tempo_atraso ," minutes."
-      sleep(tempo_atraso*60)
+      print "Couldn't collect. Trying again in ", delay_time ," minutes."
+      sleep(delay_time)
 
 
 if __name__ == '__main__':
