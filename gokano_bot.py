@@ -11,8 +11,8 @@ from time import gmtime, strftime
 #cria um navegador, um browser de codigo
 br = mechanize.Browser()
 url = 'http://www.gokano.com'
-email = 'xxx@gmail.com' 
-senha = 'xxx'   
+email = 'xxx@email.com' 
+password = 'xxx'   
 
 # Prepara para tratar cookies
 cj = cookielib.LWPCookieJar()
@@ -38,7 +38,7 @@ tempo_atraso = 60
 def gokano_bot():
   while True:
 
-    print "Iniciando Tentativa em ", strftime("%d/%m/%Y %H:%M:%S", gmtime())
+    print "Trying to collect at ", strftime("%Y-%m-%d %H:%M:%S", gmtime())
     try:
 
       br.open(url)
@@ -48,7 +48,7 @@ def gokano_bot():
 
       # Preencher o formulário com os dados de login
       br.form['email'] = email
-      br.form['password'] = senha
+      br.form['password'] = password
 
       # Enviar o formulário usando o método HTTP POST
       br.submit()
@@ -56,10 +56,11 @@ def gokano_bot():
       html = br.response().read()
       link = br.find_link(text_regex=re.compile("Collect daily"),nr=0)
       br.follow_link(link)
+      print "Collected!"
   
     except:
 
-      print "Link não encontrado! Tentando novamente em", tempo_atraso ,"minutos."
+      print "Couldn't collect. Trying again in ", tempo_atraso ," minutes."
       sleep(tempo_atraso*60)
 
 
