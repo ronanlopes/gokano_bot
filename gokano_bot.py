@@ -8,6 +8,12 @@ from time import sleep
 from daemonize import daemonize
 from time import gmtime, strftime
 
+#creates a browser
+br = mechanize.Browser()
+url = 'http://www.gokano.com'
+email = 'xxx@email.com' 
+password = 'xxx'   
+
 
 @daemonize(stdout='gokano_bot_log.txt', stderr='gokano_bot_log.txt')
 def gokano_bot():
@@ -18,13 +24,6 @@ def gokano_bot():
     print "Trying to collect at ", strftime("%Y-%m-%d %H:%M:%S", gmtime())
     try:
 
-
-
-      #creates a browser
-      br = mechanize.Browser()
-      url = 'http://www.gokano.com'
-      email = 'lopesronanufsj@gmail.com' 
-      password = 'NintendO93!'   
 
       # preparing cookies
       cj = cookielib.LWPCookieJar()
