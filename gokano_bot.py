@@ -63,7 +63,7 @@ def gokano_bot():
     except:
 
       print "Couldn't collect. Trying again in ", delay_time ," minutes."
-      sleep(delay_time)
+      sleep(delay_time*60)
 
 
 if __name__ == '__main__':
