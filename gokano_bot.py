@@ -8,31 +8,6 @@ from time import sleep
 from daemonize import daemonize
 from time import gmtime, strftime
 
-#creates a browser
-br = mechanize.Browser()
-url = 'http://www.gokano.com'
-email = 'lopesronanufsj@gmail.com' 
-password = 'NintendO93!'   
-
-# preparing cookies
-cj = cookielib.LWPCookieJar()
-br.set_cookiejar(cj)
-
-# browser options
-br.set_handle_equiv(True)
-br.set_handle_gzip(False)
-br.set_handle_redirect(True)
-br.set_handle_referer(True)
-br.set_handle_robots(False)
-br.set_handle_refresh(mechanize._http.HTTPRefreshProcessor(), max_time=1)
-
-# config the user-agent.
-br.addheaders = [('User-agent', 'Mozilla/5.0 (X11;\
- U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615\
-Fedora/3.0.1-1.fc9 Firefox/3.0.1')]
-
-#delay time between requests
-delay_time = 60
 
 @daemonize(stdout='gokano_bot_log.txt', stderr='gokano_bot_log.txt')
 def gokano_bot():
@@ -42,6 +17,34 @@ def gokano_bot():
 
     print "Trying to collect at ", strftime("%Y-%m-%d %H:%M:%S", gmtime())
     try:
+
+
+
+      #creates a browser
+      br = mechanize.Browser()
+      url = 'http://www.gokano.com'
+      email = 'lopesronanufsj@gmail.com' 
+      password = 'NintendO93!'   
+
+      # preparing cookies
+      cj = cookielib.LWPCookieJar()
+      br.set_cookiejar(cj)
+
+      # browser options
+      br.set_handle_equiv(True)
+      br.set_handle_gzip(False)
+      br.set_handle_redirect(True)
+      br.set_handle_referer(True)
+      br.set_handle_robots(False)
+      br.set_handle_refresh(mechanize._http.HTTPRefreshProcessor(), max_time=1)
+
+      # config the user-agent.
+      br.addheaders = [('User-agent', 'Mozilla/5.0 (X11;\
+       U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615\
+      Fedora/3.0.1-1.fc9 Firefox/3.0.1')]
+
+      #delay time between requests
+      delay_time = 60
 
       br.open(url)
 
@@ -60,9 +63,9 @@ def gokano_bot():
       br.follow_link(link)
       print "Collected!"
   
-    except:
+    except Exception, e:
 
-      print "Couldn't collect. Trying again in ", delay_time ," minutes."
+      print "Couldn't collect. ",str(e)," Trying again in ", delay_time ," minutes."
       sleep(delay_time)
 
 
